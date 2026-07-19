@@ -2,6 +2,5 @@
   "framework": null,
   "buildCommand": "bash ./build-vercel.sh",
   "outputDirectory": ".vercel/output",
-  "installCommand": "npm install --no-audit --no-fund",
-  "nodeVersion": "22.x"
+  "installCommand": "npm install --no-audit --no-fund"
 }
