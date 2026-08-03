@@ -38,6 +38,24 @@ mkdir -p .vercel/output/functions/render.func
 cp -R dist/client .vercel/output/static
 rm -f .vercel/output/static/index.html   # SSR owns "/", not a static shell
 
+# Generate sitemap.xml from products.json
+node -e "
+const fs = require('fs');
+const products = JSON.parse(fs.readFileSync('products.json', 'utf8'));
+const BASE = 'https://flowcart-cyan.vercel.app';
+const urls = [
+  { loc: BASE, priority: '1.0', changefreq: 'daily' },
+  { loc: BASE + '/products', priority: '0.9', changefreq: 'daily' },
+  { loc: BASE + '/blog', priority: '0.8', changefreq: 'weekly' },
+  { loc: BASE + '/cart', priority: '0.5', changefreq: 'weekly' },
+  ...products.map(p => ({ loc: BASE + '/products/' + p.slug, priority: '0.7', changefreq: 'weekly' })),
+];
+const xml = '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\\n' +
+  urls.map(u => '  <url>\\n    <loc>' + u.loc + '</loc>\\n    <priority>' + u.priority + '</priority>\\n    <changefreq>' + u.changefreq + '</changefreq>\\n  </url>').join('\\n') +
+  '\\n</urlset>';
+fs.writeFileSync('.vercel/output/static/sitemap.xml', xml);
+"
+
 echo "[3/3] bundle SSR handler + deps into the render function"
 npx esbuild vercel-entry.ts --bundle --platform=node --format=cjs --outfile=.vercel/output/functions/render.func/index.cjs 2>&1
 

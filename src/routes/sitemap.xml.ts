@@ -1,9 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
 import { products } from "~/lib/products-data";
-
-export const Route = createFileRoute("/sitemap.xml")({
-  component: Sitemap,
-});
 
 const BASE_URL = "https://flowcart-cyan.vercel.app";
 
@@ -14,8 +9,8 @@ const staticPages = [
   { path: "/cart", priority: "0.5", changefreq: "weekly" },
 ];
 
-function Sitemap() {
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+export function generateSitemap(): string {
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${staticPages
   .map(
@@ -36,8 +31,4 @@ ${products
   )
   .join("\n")}
 </urlset>`;
-
-  return new Response(xml, {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
-  });
 }
