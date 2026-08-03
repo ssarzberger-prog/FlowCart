@@ -282,6 +282,113 @@ const server = createServer(async (req, res) => {
     return;
   }
 
+  // ── API: /api/subscribe (email capture) ─────────────────────────
+  if (
+    (pathname === "/api/subscribe" || pathname === "/api/subscribe/") &&
+    req.method === "POST"
+  ) {
+    try {
+      const rawBody = await new Promise<string>((resolve, reject) => {
+        const chunks: Buffer[] = [];
+        req.on("data", (c: Buffer) => chunks.push(c));
+        req.on("end", () => resolve(Buffer.concat(chunks).toString()));
+        req.on("error", reject);
+      });
+      const { email, source } = JSON.parse(rawBody || "{}");
+
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        res.writeHead(400, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Valid email required" }));
+        return;
+      }
+
+      const db = getDb();
+      // Ensure table exists
+      await db`CREATE TABLE IF NOT EXISTS subscribers (
+        id SERIAL PRIMARY KEY,
+        email TEXT NOT NULL UNIQUE,
+        source TEXT NOT NULL DEFAULT 'footer',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      )`;
+
+      try {
+        await db`
+          INSERT INTO subscribers (email, source)
+          VALUES (${email.toLowerCase()}, ${source || "footer"})
+        `;
+        res.writeHead(201, { "Content-Type": "application/json" });
+        res.end(
+          JSON.stringify({
+            success: true,
+            message: "Welcome! Use code WELCOME10 for 10% off your first order.",
+            code: "WELCOME10",
+          }),
+        );
+      } catch (dbErr: any) {
+        if (
+          dbErr.message?.includes("unique") ||
+          dbErr.message?.includes("duplicate")
+        ) {
+          // Already subscribed — return success with same code
+          res.writeHead(200, { "Content-Type": "application/json" });
+          res.end(
+            JSON.stringify({
+              success: true,
+              message:
+                "You're already subscribed! Use code WELCOME10 for 10% off.",
+              code: "WELCOME10",
+            }),
+          );
+        } else {
+          throw dbErr;
+        }
+      }
+    } catch (err: any) {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Failed to subscribe" }));
+    }
+    return;
+  }
+
+  // ── Sitemap: /sitemap.xml ───────────────────────────────────────
+  if (pathname === "/sitemap.xml" || pathname === "/sitemap.xml/") {
+    try {
+      const productsJson = readFileSync(
+        join(CLIENT_DIR, "..", "..", "products.json"),
+        "utf-8",
+      );
+      const products = JSON.parse(productsJson) as any[];
+      const SITE_URL = "https://flowcart.com";
+      const urls = [
+        { loc: `${SITE_URL}/`, priority: "1.0", changefreq: "daily" },
+        { loc: `${SITE_URL}/products`, priority: "0.9", changefreq: "daily" },
+        { loc: `${SITE_URL}/blog`, priority: "0.8", changefreq: "weekly" },
+      ];
+      for (const p of products) {
+        urls.push({
+          loc: `${SITE_URL}/products/${p.slug}`,
+          priority: "0.7",
+          changefreq: "weekly",
+        });
+      }
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls
+  .map(
+    (u) =>
+      `  <url>\n    <loc>${u.loc.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}</loc>\n    <priority>${u.priority}</priority>\n    <changefreq>${u.changefreq}</changefreq>\n  </url>`,
+  )
+  .join("\n")}
+</urlset>`;
+      res.writeHead(200, { "Content-Type": "application/xml" });
+      res.end(xml);
+    } catch (err: any) {
+      res.writeHead(500, { "Content-Type": "text/plain" });
+      res.end(`Sitemap error: ${err.message}`);
+    }
+    return;
+  }
+
   // Try static file first
   if (pathname !== "/") {
     const filePath = join(CLIENT_DIR, pathname);

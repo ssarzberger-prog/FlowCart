@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useCart } from "~/components/CartContext";
+import { cartSeo } from "~/lib/seo";
 
 export const Route = createFileRoute("/cart")({
+  head: () => cartSeo(),
   component: CartPage,
 });
 

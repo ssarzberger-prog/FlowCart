@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { orderConfirmationSeo } from "~/lib/seo";
 
 export const Route = createFileRoute("/order-confirmation")({
+  head: () => orderConfirmationSeo(),
   component: OrderConfirmation,
 });
 

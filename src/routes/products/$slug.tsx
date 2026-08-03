@@ -1,12 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-
 import { useState } from "react";
 import { useCart } from "~/components/CartContext";
 import type { Product } from "~/lib/products";
 import { products as allProducts } from "~/lib/products-data";
-
-
+import { productDetailSeo, productSchema, breadcrumbSchema } from "~/lib/seo";
 
 const getAllProducts = createServerFn({ method: "GET" }).handler(
   async (): Promise<Product[]> => {
@@ -26,6 +24,15 @@ export const Route = createFileRoute("/products/$slug")({
   loader: async ({ params }) => {
     const products = await getAllProducts();
     return products.find((p) => p.slug === params.slug) ?? null;
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) {
+      return {
+        title: "Product Not Found — FlowCart",
+        meta: [{ name: "robots", content: "noindex" }],
+      };
+    }
+    return productDetailSeo(loaderData);
   },
   component: ProductDetail,
 });
@@ -64,8 +71,30 @@ function ProductDetail() {
     setTimeout(() => setAdded(false), 2000);
   };
 
+  const categoryLabel = categoryLabels[product.category] ?? product.category;
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      {/* JSON-LD: Product + BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(productSchema(product)),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbSchema([
+              { name: "Home", url: "/" },
+              { name: "Shop All", url: "/products" },
+              { name: product.name, url: `/products/${product.slug}` },
+            ]),
+          ),
+        }}
+      />
+
       {/* Breadcrumb */}
       <nav className="mb-8 flex items-center gap-2 text-sm text-gray-500">
         <a href="/" className="hover:text-gray-700">
@@ -80,23 +109,23 @@ function ProductDetail() {
       </nav>
 
       <div className="grid gap-10 lg:grid-cols-2">
-        {/* Product Images */}
-        <div className="space-y-4">
-          <div className="aspect-square overflow-hidden rounded-2xl bg-gray-50">
+        {/* Image Gallery */}
+        <div>
+          <div className="overflow-hidden rounded-2xl bg-gray-50">
             <img
               src={product.images[selectedImage]}
               alt={product.name}
-              className="h-full w-full object-cover"
+              className="h-96 w-full object-contain"
             />
           </div>
           {product.images.length > 1 && (
-            <div className="flex gap-3">
+            <div className="mt-4 flex gap-3">
               {product.images.map((img, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setSelectedImage(idx)}
-                  className={`aspect-square w-20 overflow-hidden rounded-xl border-2 transition-colors ${
+                  className={`overflow-hidden rounded-lg border-2 transition-all ${
                     idx === selectedImage
                       ? "border-indigo-600"
                       : "border-gray-200 hover:border-gray-300"
@@ -105,7 +134,7 @@ function ProductDetail() {
                   <img
                     src={img}
                     alt={`${product.name} view ${idx + 1}`}
-                    className="h-full w-full object-cover"
+                    className="h-20 w-20 object-contain"
                   />
                 </button>
               ))}
@@ -115,22 +144,24 @@ function ProductDetail() {
 
         {/* Product Info */}
         <div>
-          <span className="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600">
-            {categoryLabels[product.category] ?? product.category}
+          {/* Category */}
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-700">
+            {categoryLabel}
           </span>
 
+          {/* Name */}
           <h1 className="mt-3 text-3xl font-bold text-gray-900">
             {product.name}
           </h1>
 
           {/* Rating */}
           <div className="mt-3 flex items-center gap-2">
-            <div className="flex items-center gap-0.5">
-              {[...Array(5)].map((_, i) => (
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((star) => (
                 <svg
-                  key={i}
+                  key={star}
                   className={`h-5 w-5 ${
-                    i < Math.floor(product.rating)
+                    star <= Math.round(product.rating)
                       ? "text-amber-400"
                       : "text-gray-200"
                   }`}
@@ -141,7 +172,7 @@ function ProductDetail() {
                 </svg>
               ))}
             </div>
-            <span className="text-sm font-medium text-gray-700">
+            <span className="text-sm font-semibold text-gray-700">
               {product.rating}
             </span>
             <span className="text-sm text-gray-400">
@@ -204,7 +235,6 @@ function ProductDetail() {
             >
               {inCart ? "✓ Added to Cart" : added ? "✓ Added!" : "Add to Cart"}
             </button>
-
             <a
               href={product.stripePaymentLink}
               target="_blank"

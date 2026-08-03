@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import { ProductCard } from "~/components/ProductCard";
 import type { Product } from "~/lib/products";
 import { products as allProducts } from "~/lib/products-data";
+import { productsCatalogSeo, itemListSchema } from "~/lib/seo";
 
 const loadProducts = createServerFn({ method: "GET" }).handler(async () => {
   return allProducts as Product[];
@@ -24,6 +25,10 @@ interface SearchParams {
 
 export const Route = createFileRoute("/products/")({
   loader: () => loadProducts(),
+  head: () => {
+    const products = allProducts as Product[];
+    return productsCatalogSeo(products.length);
+  },
   validateSearch: (params: Record<string, string>): SearchParams => ({
     category: params.category,
     sort: params.sort || "featured",
@@ -106,6 +111,14 @@ function ProductsCatalog() {
         <span>/</span>
         <span className="text-gray-900">Shop All</span>
       </nav>
+
+      {/* JSON-LD: ItemList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(itemListSchema(products)),
+        }}
+      />
 
       {/* Page Header */}
       <div className="mb-8">

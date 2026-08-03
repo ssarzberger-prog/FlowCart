@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { blogSeo } from "~/lib/seo";
 
 export const Route = createFileRoute("/blog")({
+  head: () => blogSeo(),
   component: BlogPage,
 });
 

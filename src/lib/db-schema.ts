@@ -43,4 +43,11 @@ export async function initSchema() {
     sent_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     scheduled_for TIMESTAMPTZ NOT NULL
   )`;
+
+  await db`CREATE TABLE IF NOT EXISTS subscribers (
+    id SERIAL PRIMARY KEY,
+    email TEXT NOT NULL UNIQUE,
+    source TEXT NOT NULL DEFAULT 'footer',
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  )`;
 }

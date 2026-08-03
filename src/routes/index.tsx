@@ -3,6 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { ProductCard } from "~/components/ProductCard";
 import type { Product } from "~/lib/products";
 import { products as allProducts } from "~/lib/products-data";
+import { homeSeo, websiteSchema } from "~/lib/seo";
 
 interface Bundle {
   name: string;
@@ -79,6 +80,7 @@ const categoryLabels: Record<string, string> = {
 
 export const Route = createFileRoute("/")({
   loader: () => loadHomeData(),
+  head: () => homeSeo(),
   component: Home,
 });
 

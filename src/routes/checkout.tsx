@@ -2,8 +2,10 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useCart } from "~/components/CartContext";
 import { processCheckout } from "~/lib/api-handlers";
+import { checkoutSeo } from "~/lib/seo";
 
 export const Route = createFileRoute("/checkout")({
+  head: () => checkoutSeo(),
   component: CheckoutPage,
 });
 
