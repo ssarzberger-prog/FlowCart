@@ -39,10 +39,10 @@ cp -R dist/client .vercel/output/static
 rm -f .vercel/output/static/index.html   # SSR owns "/", not a static shell
 
 echo "[3/3] bundle SSR handler + deps into the render function"
-npx esbuild vercel-entry.ts --bundle --platform=node --outfile=.vercel/output/functions/render.func/index.mjs 2>&1
+npx esbuild vercel-entry.ts --bundle --platform=node --format=cjs --outfile=.vercel/output/functions/render.func/index.cjs 2>&1
 
 cat > .vercel/output/functions/render.func/.vc-config.json <<'JSON'
-{ "runtime": "nodejs22.x", "handler": "index.mjs", "launcherType": "Nodejs", "supportsResponseStreaming": true }
+{ "runtime": "nodejs22.x", "handler": "index.cjs", "launcherType": "Nodejs", "supportsResponseStreaming": true }
 JSON
 cat > .vercel/output/config.json <<'JSON'
 { "version": 3, "routes": [ { "handle": "filesystem" }, { "src": "/(.*)", "dest": "/render" } ] }

@@ -8,7 +8,7 @@ export const products: Product[] = [
     "category": "accessories",
     "price": 39.99,
     "cost": 13,
-    "description": "A desk mat that transforms your workspace. Made from 100% merino wool felt with a suede leather underside, the FeltSpace Desk Mat provides a luxurious surface for typing and writing. Water-resistant and easy to clean.",
+    "description": "A desk mat that transforms your workspace. Made from 100% merino wool felt with a suede leather underside.",
     "features": [
       "100% merino wool felt surface",
       "Genuine suede leather underside",
@@ -32,7 +32,7 @@ export const products: Product[] = [
     "category": "accessories",
     "price": 49.99,
     "cost": 18,
-    "description": "Create a quiet zone anywhere. FocusZone Acoustic Panels attach to the sides and back of your desk, absorbing ambient noise and reducing echo. The hexagonal design looks stunning and doubles as a pinboard. Each set includes 6 panels with mounting hardware.",
+    "description": "Create a quiet zone anywhere. 6 hexagonal acoustic panels with mounting hardware.",
     "features": [
       "6 hexagonal acoustic panels",
       "Noise reduction coefficient: 0.85",
@@ -56,12 +56,12 @@ export const products: Product[] = [
     "category": "cable-management",
     "price": 9,
     "cost": 3,
-    "description": "The fastest way to a clean desk. These ultra-strong magnetic cable clips snap onto any ferrous surface or stick anywhere with the included adhesive metal plates. Route charging cables, headphone cords, and USB cables neatly along your desk edge. Each clip holds up to 3 cables. No tools, no permanent mounting.",
+    "description": "Ultra-strong magnetic cable clips. Each holds up to 3 cables. No tools needed.",
     "features": [
-      "Material: Neodymium magnet + silicone grip",
-      "Pack Size: 6 clips + 6 adhesive metal plates",
-      "Capacity: 3 cables per clip",
-      "Color: Black"
+      "Neodymium magnet + silicone grip",
+      "6 clips + 6 adhesive plates",
+      "3 cables per clip",
+      "Black"
     ],
     "images": [
       "/images/magnetic-cable-clips.jpg"
@@ -78,12 +78,12 @@ export const products: Product[] = [
     "category": "cable-management",
     "price": 14,
     "cost": 5,
-    "description": "Tame the snake pit of cords under your desk in seconds. This expandable braided sleeve wraps 3-8 cables into one tidy bundle. Simply gather your cables, thread them through, and zip it closed. The adjustable length (cut to fit) and velour interior protect cables from wear. Includes 4 cable clips for desk-edge routing.",
+    "description": "Expandable braided sleeve wraps 3-8 cables into one tidy bundle.",
     "features": [
-      "Material: Braided nylon + velour lining",
-      "Length: 20 inches (cuttable)",
-      "Capacity: 3-8 cables",
-      "Includes: 1 sleeve + 4 adhesive cable clips"
+      "Braided nylon + velour lining",
+      "20 inches (cuttable)",
+      "3-8 cables",
+      "Includes 4 cable clips"
     ],
     "images": [
       "/images/cable-management-sleeve.jpg"
@@ -100,12 +100,12 @@ export const products: Product[] = [
     "category": "desk-organization",
     "price": 17,
     "cost": 6,
-    "description": "Stop digging through piles of papers and accessories. This modular mesh organizer keeps everything in its place with 5 compartments sized for pens, phone, sticky notes, paper clips, and more. The minimalist metal design complements any desk aesthetic. Slide a photo or to-do card in the front slot for easy visibility.",
+    "description": "Modular mesh organizer with 5 compartments.",
     "features": [
-      "Material: Powder-coated steel mesh",
-      "Dimensions: 8.5 x 5 x 4.5 inches",
-      "Compartments: 5 compartments + front card slot",
-      "Color: Black / White"
+      "Powder-coated steel mesh",
+      "8.5 x 5 x 4.5 inches",
+      "5 compartments + card slot",
+      "Black / White"
     ],
     "images": [
       "/images/mesh-desk-organizer.jpg"
@@ -122,12 +122,12 @@ export const products: Product[] = [
     "category": "desk-organization",
     "price": 29,
     "cost": 11,
-    "description": "Instantly reclaim your desktop space with this sleek under-desk drawer. Mounts underneath any desk surface in seconds (no tools required) to keep pens, sticky notes, chargers, and small accessories organized and out of sight. The smooth ball-bearing glides make access effortless. Available in bamboo and black finishes.",
+    "description": "Sleek under-desk drawer. No tools installation.",
     "features": [
-      "Material: Bamboo / ABS plastic",
-      "Dimensions: 16 x 8 x 2.5 inches",
-      "Installation: Adhesive tape or screws (both included)",
-      "Weight Capacity: 5 lbs"
+      "Bamboo / ABS plastic",
+      "16 x 8 x 2.5 inches",
+      "Adhesive tape or screws",
+      "5 lbs capacity"
     ],
     "images": [
       "/images/under-desk-drawer.jpg"
@@ -144,12 +144,12 @@ export const products: Product[] = [
     "category": "desk-organization",
     "price": 35,
     "cost": 14,
-    "description": "A beautiful workspace starts at eye level. This premium bamboo monitor stand raises your screen 4 inches for optimal viewing posture while adding valuable storage underneath. The built-in drawer keeps pens, keys, and gadgets tucked away. The sturdy base holds monitors up to 35 lbs. Also compatible with laptops.",
+    "description": "Premium bamboo monitor stand with built-in drawer.",
     "features": [
-      "Material: Natural bamboo",
-      "Dimensions: 17.5 x 9.5 x 4 inches",
-      "Drawer: Built-in sliding drawer",
-      "Weight Capacity: 35 lbs"
+      "Natural bamboo",
+      "17.5 x 9.5 x 4 inches",
+      "Built-in drawer",
+      "35 lbs capacity"
     ],
     "images": [
       "/images/bamboo-monitor-stand.jpg"
@@ -166,12 +166,12 @@ export const products: Product[] = [
     "category": "ergonomics",
     "price": 22,
     "cost": 8,
-    "description": "Experience all-day comfort with our premium Ergonomic Gel Wrist Rest. The gel-infused memory foam conforms to your wrists, reducing pressure points and preventing repetitive strain during long work sessions. The non-slip rubber base keeps it firmly in place whether you're typing or mousing. Available in full-size keyboard and compact versions.",
+    "description": "Gel-infused memory foam wrist rest for all-day comfort.",
     "features": [
-      "Material: Gel-infused memory foam + rubber base",
-      "Dimensions: 18 x 3.5 x 0.8 inches",
-      "Color: Black / Gray",
-      "Compatibility: Full-size and TKL keyboards"
+      "Gel-infused memory foam + rubber base",
+      "18 x 3.5 x 0.8 inches",
+      "Black / Gray",
+      "Full-size and TKL keyboards"
     ],
     "images": [
       "/images/ergo-gel-wrist-rest.jpg"
@@ -188,12 +188,12 @@ export const products: Product[] = [
     "category": "ergonomics",
     "price": 27,
     "cost": 10,
-    "description": "Transform any chair into an ergonomic throne. The contoured memory foam design relieves tailbone pressure, promotes proper spinal alignment, and reduces hip strain during 8-hour desk marathons. Features a breathable velvet cover with a non-slip bottom and a built-in carrying handle for easy transport.",
+    "description": "Contoured memory foam cushion for tailbone relief.",
     "features": [
-      "Material: High-density memory foam + velvet cover",
-      "Dimensions: 17 x 14 x 3.5 inches",
-      "Cover: Removable and washable",
-      "Weight Capacity: Up to 300 lbs"
+      "High-density memory foam + velvet cover",
+      "17 x 14 x 3.5 inches",
+      "Removable washable cover",
+      "Up to 300 lbs"
     ],
     "images": [
       "/images/memory-foam-seat-cushion.jpg"
@@ -210,12 +210,12 @@ export const products: Product[] = [
     "category": "ergonomics",
     "price": 39,
     "cost": 15,
-    "description": "Raise your laptop screen to eye level and say goodbye to neck strain. This ultra-portable aluminum stand features 6 adjustable height angles, a ventilated honeycomb design for heat dissipation, and a fold-flat form factor that slips into any bag. Holds laptops from 10 to 17 inches with a secure rubber grip.",
+    "description": "Ultra-portable aluminum stand with 6 adjustable angles.",
     "features": [
-      "Material: Aerospace-grade aluminum",
-      "Weight: 0.8 lbs",
-      "Height Settings: 6 angles (1.2 to 5.9 inches)",
-      "Compatibility: 10-17 inch laptops"
+      "Aerospace-grade aluminum",
+      "0.8 lbs",
+      "6 angles (1.2 to 5.9 inches)",
+      "10-17 inch laptops"
     ],
     "images": [
       "/images/adjustable-laptop-stand.jpg"
@@ -232,13 +232,12 @@ export const products: Product[] = [
     "category": "organization",
     "price": 34.99,
     "cost": 11,
-    "description": "Declutter your desk, declutter your mind. The ZenDesk Organizer Set includes a multi-compartment pen holder, a floating phone stand, a sticky-note dispenser, and a minimalist tray for small accessories. All pieces are made from matte-finish ABS plastic with non-slip bases.",
+    "description": "4-piece desk organization system with pen holder, phone stand, and more.",
     "features": [
-      "4-piece desk organization system",
-      "Matte ABS construction with non-slip bases",
-      "Floating phone stand fits all phones",
-      "Modular — arrange to suit your space",
-      "Easy to clean"
+      "4-piece system",
+      "Matte ABS construction",
+      "Floating phone stand",
+      "Modular design"
     ],
     "images": [
       "https://picsum.photos/seed/organizer/600/600",
@@ -256,13 +255,12 @@ export const products: Product[] = [
     "category": "productivity",
     "price": 21,
     "cost": 8,
-    "description": "Never lose track of deadlines again. This large adhesive-backed whiteboard calendar sticks to any smooth wall without nails or tape and removes cleanly without residue. The 12-month grid layout gives you a bird's-eye view of your entire year. Writes clean with dry-erase markers and wipes effortlessly. Includes 3 markers and a microfiber cloth.",
+    "description": "Large adhesive-backed whiteboard calendar. 12-month grid view.",
     "features": [
-      "Material: PET film + adhesive backing",
-      "Dimensions: 36 x 24 inches",
-      "Grid: 12 months visible at once",
-      "Includes: 3 dry-erase markers + microfiber cloth",
-      "Installation: Peel-and-stick, removable without residue"
+      "PET film + adhesive",
+      "36 x 24 inches",
+      "12 months visible",
+      "3 markers + cloth included"
     ],
     "images": [
       "/images/whiteboard-wall-calendar.jpg"
@@ -279,13 +277,13 @@ export const products: Product[] = [
     "category": "productivity",
     "price": 27,
     "cost": 10,
-    "description": "Finally, a focus timer you can actually feel. This tactile Bluetooth cube lets you set Pomodoro sessions with a simple flip — rotate to the desired time (5, 15, 25, or 45 minutes) and it starts counting down with a gentle vibration when time's up. Syncs wirelessly to display your focus stats on desktop or phone. No screens, no distractions — just focused work.",
+    "description": "Tactile Pomodoro timer cube with silent vibration.",
     "features": [
-      "Material: Silicone + recycled ABS",
-      "Timer Settings: 5 / 15 / 25 / 45 minutes",
-      "Connectivity: Bluetooth 5.0 (syncs with iOS/Android/Desktop)",
-      "Battery: Built-in rechargeable (3 weeks per charge)",
-      "Notification: Silent vibration + LED glow"
+      "Silicone + recycled ABS",
+      "5/15/25/45 min settings",
+      "Bluetooth 5.0",
+      "Rechargeable (3 weeks)",
+      "Silent vibration + LED"
     ],
     "images": [
       "/images/focus-timer-cube.jpg"
@@ -302,13 +300,13 @@ export const products: Product[] = [
     "category": "smart-lighting",
     "price": 19,
     "cost": 7,
-    "description": "Transform your workspace with 16 million colors. These smart LED strips sync to your music, games, or productivity rhythm via the free app. Includes adhesive backing for easy setup under desks, behind monitors, or along shelving. Features voice control (Alexa/Google), timer scheduling, and scene presets.",
+    "description": "16.4ft smart LED strips with 16 million colors. App + voice control.",
     "features": [
-      "Length: 16.4 ft (5m)",
-      "Control: App + Voice (Alexa/Google)",
-      "LED Count: 60 LEDs per meter",
-      "Power: USB powered",
-      "Features: Music sync, timer, 16 million colors"
+      "16.4 ft (5m)",
+      "App + Voice (Alexa/Google)",
+      "60 LEDs per meter",
+      "USB powered",
+      "Music sync, timer"
     ],
     "images": [
       "/images/rgb-strip-lights.jpg"
@@ -325,13 +323,13 @@ export const products: Product[] = [
     "category": "smart-lighting",
     "price": 39,
     "cost": 16,
-    "description": "Light your desk without lighting your screen. The asymmetric optical design of this monitor light bar illuminates your workspace while preventing screen glare — perfect for dim offices and late-night work sessions. Features auto-dimming ambient sensor, touch control, and a no-screw clamp that fits any monitor. USB powered.",
+    "description": "Glare-free monitor light bar with auto-dimming sensor.",
     "features": [
-      "Material: Aluminum alloy",
-      "Light Modes: Auto-dimming + 3 brightness levels, 3 color temps",
-      "Clamp Range: Up to 1.2 inches thick",
-      "Power: USB-C (adapter included)",
-      "Color Rendering: Ra > 95"
+      "Aluminum alloy",
+      "Auto-dimming + 3 brightness/3 temps",
+      "Fits monitors up to 1.2\"",
+      "USB-C powered",
+      "Ra > 95 color rendering"
     ],
     "images": [
       "/images/monitor-light-bar.jpg"
@@ -348,12 +346,12 @@ export const products: Product[] = [
     "category": "smart-lighting",
     "price": 45,
     "cost": 18,
-    "description": "Light up your workspace and charge your devices simultaneously. This sleek LED desk lamp features 5 brightness levels, 3 color temperatures (warm, natural, cool), and a built-in Qi wireless charging pad at the base. The flexible gooseneck arm directs light exactly where you need it. USB-A port charges a second device.",
+    "description": "Sleek LED desk lamp with built-in Qi wireless charger.",
     "features": [
-      "Material: Aluminum + ABS",
-      "Light Modes: 5 brightness x 3 color temperatures",
-      "Charging: 15W Qi wireless + USB-A port",
-      "Power: USB-C powered (adapter included)"
+      "Aluminum + ABS",
+      "5 brightness x 3 color temps",
+      "15W Qi wireless + USB-A",
+      "USB-C powered"
     ],
     "images": [
       "/images/led-desk-lamp-charger.jpg"

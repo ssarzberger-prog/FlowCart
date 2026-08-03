@@ -1,15 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { readFile } from "node:fs/promises";
 import { useState, useMemo } from "react";
 import { ProductCard } from "~/components/ProductCard";
 import type { Product } from "~/lib/products";
-
-const PRODUCTS_PATH = "/home/team/shared/products.json";
+import { products as allProducts } from "~/lib/products-data";
 
 const loadProducts = createServerFn({ method: "GET" }).handler(async () => {
-  const raw = await readFile(PRODUCTS_PATH, "utf8");
-  return JSON.parse(raw) as Product[];
+  return allProducts as Product[];
 });
 
 const categoryLabels: Record<string, string> = {

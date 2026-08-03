@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { readFile } from "node:fs/promises";
 import { ProductCard } from "~/components/ProductCard";
 import type { Product } from "~/lib/products";
+import { products as allProducts } from "~/lib/products-data";
 
 interface Bundle {
   name: string;
@@ -15,11 +15,7 @@ interface Bundle {
 
 // Load products and bundles server-side
 const loadHomeData = createServerFn({ method: "GET" }).handler(async () => {
-  const raw = await readFile(
-    "/home/team/shared/products.json",
-    "utf8",
-  );
-  const products = JSON.parse(raw) as Product[];
+  const products = allProducts as Product[];
 
   const featured = [...products]
     .sort((a, b) => b.rating - a.rating)
